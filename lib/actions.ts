@@ -9,7 +9,7 @@ import {
 } from "@/graphql";
 import {ProjectForm} from "@/common.types";
 import {categoryFilters} from "@/constants";
-import projectForm from "@/components/ProjectForm";
+
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -104,7 +104,7 @@ export const deleteProject = (id: string, token: string) => {
     client.setHeader('Authorization', `Bearer ${token}`)
     return makeGraphQLRequest(deleteProjectMutation, {id});
 }
-export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
+export const updateProject = async (form: ProjectForm, projectId: string | undefined, token: string) => {
     function isBase64DataURL(value: string) {
         const base64Regex = /^data:image\/[a-z]+;base64,/;
         return base64Regex.test(value);
